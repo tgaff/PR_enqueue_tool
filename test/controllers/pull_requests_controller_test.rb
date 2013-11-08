@@ -18,7 +18,7 @@ class PullRequestsControllerTest < ActionController::TestCase
 
   test "should create pull_request" do
     assert_difference('PullRequest.count') do
-      post :create, pull_request: { number: @pull_request.number }
+      post :create, pull_request: { number: @pull_request.number + 1000000000 }
     end
 
     assert_redirected_to pull_request_path(assigns(:pull_request))
