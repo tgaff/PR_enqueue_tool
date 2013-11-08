@@ -11,12 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131108224249) do
+ActiveRecord::Schema.define(version: 20131108224716) do
 
   create_table "pullrequests", force: true do |t|
     t.integer  "number"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "pullrequests", ["number"], name: "index_pullrequests_on_number", unique: true
 
 end
