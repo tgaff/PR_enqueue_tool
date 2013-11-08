@@ -1,0 +1,27 @@
+<h1>Listing pullrequests</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Number</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @pullrequests.each do |pullrequest| %>
+      <tr>
+        <td><%= pullrequest.number %></td>
+        <td><%= link_to 'Show', pullrequest %></td>
+        <td><%= link_to 'Edit', edit_pullrequest_path(pullrequest) %></td>
+        <td><%= link_to 'Destroy', pullrequest, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Pullrequest', new_pullrequest_path %>
