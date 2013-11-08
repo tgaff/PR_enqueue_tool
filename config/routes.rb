@@ -1,4 +1,6 @@
 Gt::Application.routes.draw do
+  resources :commits
+
   resources :pullrequests
 
   # The priority is based upon order of creation: first created -> highest priority.

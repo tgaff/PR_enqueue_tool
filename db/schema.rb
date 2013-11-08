@@ -11,7 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131108225603) do
+ActiveRecord::Schema.define(version: 20131108230033) do
+
+  create_table "commits", force: true do |t|
+    t.boolean  "test_pushed", default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "pullrequests", force: true do |t|
     t.integer  "number"

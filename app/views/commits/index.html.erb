@@ -1,0 +1,27 @@
+<h1>Listing commits</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Test pushed</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @commits.each do |commit| %>
+      <tr>
+        <td><%= commit.test_pushed %></td>
+        <td><%= link_to 'Show', commit %></td>
+        <td><%= link_to 'Edit', edit_commit_path(commit) %></td>
+        <td><%= link_to 'Destroy', commit, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Commit', new_commit_path %>
