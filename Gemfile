@@ -32,6 +32,7 @@ gem 'github_api'
 group :development, :test do
   gem 'rspec-rails'
   gem 'shoulda-matchers'
+  gem 'pry-debugger'
 end
 
 # Use ActiveModel has_secure_password
