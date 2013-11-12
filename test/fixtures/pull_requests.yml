@@ -2,6 +2,15 @@
 
 one:
   number: 1
+  open: true
 
 two:
   number: 2
+
+open:
+  number: 1000
+  open: true
+
+closed:
+  number: 999
+  open: false

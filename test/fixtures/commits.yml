@@ -3,9 +3,9 @@
 one:
   test_pushed:
   sha: '32afbc1421a96f239331d043457caf89630d940b'
-two:
-  test_pushed:
+pushed:
+  test_pushed: true
   sha: '2222bc1421a96f239331d043457caf89630d2222'
-three:
-  test_pushed:
+not_pushed:
+  test_pushed: false
   sha: '2222bc1421a96f239331d0434571111111111111'
