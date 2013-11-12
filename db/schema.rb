@@ -13,19 +13,19 @@
 
 ActiveRecord::Schema.define(version: 20131108230406) do
 
-  create_table "PullRequests", force: true do |t|
+  create_table "commits", force: true do |t|
+    t.boolean  "test_pushed", default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "pull_requests", force: true do |t|
     t.integer  "number"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "open",       default: true
   end
 
-  add_index "PullRequests", ["number"], name: "index_pullrequests_on_number", unique: true
-
-  create_table "commits", force: true do |t|
-    t.boolean  "test_pushed", default: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+  add_index "pull_requests", ["number"], name: "index_pull_requests_on_number", unique: true
 
 end

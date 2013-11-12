@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class PullrequestTest < ActiveSupport::TestCase
+class PullRequestTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

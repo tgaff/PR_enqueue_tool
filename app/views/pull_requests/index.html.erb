@@ -1,4 +1,4 @@
-<h1>Listing pullrequests</h1>
+<h1>Listing Pull Requests</h1>
 
 <table>
   <thead>
@@ -11,12 +11,12 @@
   </thead>
 
   <tbody>
-    <% @pullrequests.each do |pullrequest| %>
+    <% @pull_requests.each do |pull_request| %>
       <tr>
-        <td><%= pullrequest.number %></td>
-        <td><%= link_to 'Show', pullrequest %></td>
-        <td><%= link_to 'Edit', edit_pullrequest_path(pullrequest) %></td>
-        <td><%= link_to 'Destroy', pullrequest, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= pull_request.number %></td>
+        <td><%= link_to 'Show', pull_request %></td>
+        <td><%= link_to 'Edit', edit_pull_request_path(pull_request) %></td>
+        <td><%= link_to 'Destroy', pull_request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -24,4 +24,4 @@
 
 <br>
 
-<%= link_to 'New Pullrequest', new_pullrequest_path %>
+<%= link_to 'New Pullrequest', new_pull_request_path %>

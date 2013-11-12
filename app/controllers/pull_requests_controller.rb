@@ -1,74 +1,74 @@
-class PullrequestsController < ApplicationController
-  before_action :set_pullrequest, only: [:show, :edit, :update, :destroy]
+class PullRequestsController < ApplicationController
+  before_action :set_pull_request, only: [:show, :edit, :update, :destroy]
 
-  # GET /pullrequests
-  # GET /pullrequests.json
+  # GET /pull_requests
+  # GET /pull_requests.json
   def index
-    @pullrequests = Pullrequest.all
+    @pull_requests = PullRequest.all
   end
 
-  # GET /pullrequests/1
-  # GET /pullrequests/1.json
+  # GET /pull_requests/1
+  # GET /pull_requests/1.json
   def show
   end
 
-  # GET /pullrequests/new
+  # GET /pull_requests/new
   def new
-    @pullrequest = Pullrequest.new
+    @pull_request = PullRequest.new
   end
 
-  # GET /pullrequests/1/edit
+  # GET /pull_requests/1/edit
   def edit
   end
 
-  # POST /pullrequests
-  # POST /pullrequests.json
+  # POST /pull_requests
+  # POST /pull_requests.json
   def create
-    @pullrequest = Pullrequest.new(pullrequest_params)
+    @pull_request = PullRequest.new(pull_request_params)
 
     respond_to do |format|
-      if @pullrequest.save
-        format.html { redirect_to @pullrequest, notice: 'Pullrequest was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @pullrequest }
+      if @pull_request.save
+        format.html { redirect_to @pull_request, notice: 'PullRequest was successfully created.' }
+        format.json { render action: 'show', status: :created, location: @pull_request }
       else
         format.html { render action: 'new' }
-        format.json { render json: @pullrequest.errors, status: :unprocessable_entity }
+        format.json { render json: @pull_request.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # PATCH/PUT /pullrequests/1
-  # PATCH/PUT /pullrequests/1.json
+  # PATCH/PUT /pull_requests/1
+  # PATCH/PUT /pull_requests/1.json
   def update
     respond_to do |format|
-      if @pullrequest.update(pullrequest_params)
-        format.html { redirect_to @pullrequest, notice: 'Pullrequest was successfully updated.' }
+      if @pull_request.update(pull_request_params)
+        format.html { redirect_to @pull_request, notice: 'PullRequest was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
-        format.json { render json: @pullrequest.errors, status: :unprocessable_entity }
+        format.json { render json: @pull_request.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # DELETE /pullrequests/1
-  # DELETE /pullrequests/1.json
+  # DELETE /pull_requests/1
+  # DELETE /pull_requests/1.json
   def destroy
-    @pullrequest.destroy
+    @pull_request.destroy
     respond_to do |format|
-      format.html { redirect_to pullrequests_url }
+      format.html { redirect_to pull_requests_url }
       format.json { head :no_content }
     end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_pullrequest
-      @pullrequest = Pullrequest.find(params[:id])
+    def set_pull_request
+      @pull_request = PullRequest.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def pullrequest_params
-      params.require(:pullrequest).permit(:number)
+    def pull_request_params
+      params.require(:pull_request).permit(:number)
     end
 end

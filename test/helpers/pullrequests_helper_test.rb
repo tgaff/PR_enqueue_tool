@@ -1,4 +1,4 @@
 require 'test_helper'
 
-class PullrequestsHelperTest < ActionView::TestCase
+class PullRequestsHelperTest < ActionView::TestCase
 end
