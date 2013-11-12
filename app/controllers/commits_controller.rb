@@ -69,6 +69,6 @@ class CommitsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def commit_params
-      params.require(:commit).permit(:test_pushed)
+      params.require(:commit).permit(:test_pushed, :sha)
     end
 end
