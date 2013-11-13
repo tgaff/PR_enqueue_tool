@@ -11,21 +11,23 @@ module GH
     open_prs = pull_requests
 
     open_prs.each do |github_pr|
-      pr_record = PullRequest.find_or_create_by_number(github_pr.number)
+      pr_record = PullRequest.find_or_create_by(number: github_pr.number)
 
       # if the pr was closed we know its open now, re-open it locally
       if pr_record.open == false
         pr_record.open = true
         pr_record.save!
       end
-
-      current_sha = github_pr.sha
+      current_sha = github_pr.head.sha
       # create a new commit record or find the current one
-      commit_record = pr_record.commits.find_or_create_by_sha(current_sha)
+      commit_record = pr_record.commits.find_or_create_by(sha: current_sha)
       Rails.logger.info "found commit #{commit_record}"
-
       # has the sha been tested yet?
-      test_pr unless commit_record.test_pushed?
+      unless commit_record.test_pushed?
+        commit_record.test_pushed = false
+        commit_record.save!
+        test_pr(commit_record.pull_request.number)
+      end
     end
   end
 

@@ -9,3 +9,7 @@ pushed:
 not_pushed:
   test_pushed: false
   sha: '2222bc1421a96f239331d0434571111111111111'
+github_open:
+  test_pushed: false
+  sha: '36539a13ddec2c92e3fbdb3216a4b63339e25124'
+  pull_request: github_open
