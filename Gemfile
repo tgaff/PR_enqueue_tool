@@ -35,6 +35,10 @@ group :development, :test do
   gem 'pry-debugger'
 end
 
+group :test do
+  gem 'webmock'
+  gem 'vcr'
+end
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 

@@ -38,8 +38,25 @@ describe GH do
     fixtures :pull_requests
 
     it 'closes the open pr' do
-      expect { close_pr(1000) }.to change { PullRequest.find_by_number(1000).open }.from(true).to(false)
+      expect { close_pr(100000) }.to change { PullRequest.find_by_number(100000).open }.from(true).to(false)
     end
 
   end
+
+
+  context '.close_prs_locally_if_closed_on_github', :vcr do
+
+    fixtures :pull_requests
+    let(:pr_record_github_open) { PullRequest.find_by_number(pull_requests(:github_open).number) }
+    let(:pr_record_github_closed) { PullRequest.find_by_number(pull_requests(:open).number) }
+
+    it "does not close open PRs still open remotely" do
+      expect { close_prs_locally_if_closed_on_github }.to_not change{ pr_record_github_open.reload.open }
+    end
+
+    it "closes open PRs when not open on the remote" do
+      expect { close_prs_locally_if_closed_on_github }.to change { pr_record_github_closed.reload.open }.from(true).to(false)
+    end
+  end
+
 end

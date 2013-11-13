@@ -1,17 +1,13 @@
 
 module GH
 
-  GITHUB_TOKEN =  ENV['GITHUB_TOKEN']
-  USER =          ENV['GITHUB_USER']
-  REPO =          ENV['GITHUB_REPO']
-
-
+  GITHUB_TOKEN =  Rails.configuration.github_token || ENV['GITHUB_TOKEN'].empty? ? nil : ENV['GITHUB_TOKEN']
+  USER =          Rails.configuration.github_user || ENV['GITHUB_USER']
+  REPO =          Rails.configuration.github_repo || ENV['GITHUB_REPO']
 
 
   def get_and_enqueue_from_github
-    gh_pr = Github::PullRequests.new oauth_token: GITHUB_TOKEN, user: USER, repo: REPO
-
-    pull_requests = gh_pr.list
+    pull_requests = get_github_prs
     open_prs = pull_requests
 
     open_prs.each do |github_pr|
@@ -37,12 +33,16 @@ module GH
     puts "I will test pr#{pr}"
   end
 
-  def close_prs_locally_if_closed_on_github
-    gh_pr = Github::PullRequests.new oauth_token: GITHUB_TOKEN, user: USER, repo: REPO
-    github_pr_numbers = []
-    gh_pr.list.each { |pr| github_pr_numbers << pr.number }
+  def get_github_prs
+    Github::PullRequests.new(oauth_token: GITHUB_TOKEN, user: USER, repo: REPO).list
+  end
 
-    PullRequests.where(open: true).each do |local_pr|
+  def close_prs_locally_if_closed_on_github
+    gh_prs = get_github_prs
+    github_pr_numbers = []
+    gh_prs.each { |pr| github_pr_numbers << pr.number }
+
+    PullRequest.where(open: true).each do |local_pr|
       unless github_pr_numbers.include? local_pr.number
         Rails.logger.info "closing pr #{local_pr.number}"
         close_pr local_pr.number

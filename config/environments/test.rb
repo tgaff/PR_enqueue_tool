@@ -33,4 +33,9 @@ Gt::Application.configure do
 
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
+
+  # used in tests to configure the github connection
+  config.github_token = nil
+  config.github_user = 'octocat'
+  config.github_repo = 'Hello-World'
 end
