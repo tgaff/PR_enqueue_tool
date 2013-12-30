@@ -46,7 +46,7 @@ module GH
 
     PullRequest.where(open: true).each do |local_pr|
       unless github_pr_numbers.include? local_pr.number
-        Rails.logger.info "closing pr #{local_pr.number}"
+        Rails.logger.info "closing local pr record for #{local_pr.number}"
         close_pr local_pr.number
       end
     end

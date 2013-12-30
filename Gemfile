@@ -27,7 +27,7 @@ group :doc do
 end
 
 gem 'github_api'
-
+gem 'curb'
 
 group :development, :test do
   gem 'rspec-rails'
