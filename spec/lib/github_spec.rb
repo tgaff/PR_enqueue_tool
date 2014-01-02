@@ -16,11 +16,13 @@ describe GH do
         let(:pr_record) { pull_requests(:github_open).reload }
 
         it 'enqueues a test' do
-          #self.should_receive(:test_pr)
-
           allow(self).to receive(:test_pr).with(92)
-
           get_and_enqueue_from_github
+        end
+
+        it 'marks it as tested' do
+          pr_record_commit = commits(:github_open)
+          expect { get_and_enqueue_from_github }.to change { pr_record_commit.reload.test_pushed }.from(false).to(true)
         end
       end
 

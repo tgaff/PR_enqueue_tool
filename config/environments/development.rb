@@ -26,4 +26,11 @@ Gt::Application.configure do
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
+
+  config.logger = Logger.new(STDOUT)
+  config.logger.level = Logger.const_get('INFO')
+  config.github_token = nil
+  config.github_user = 'octocat'
+  config.github_repo = 'Hello-World'
+
 end

@@ -21,10 +21,10 @@ module GH
       current_sha = github_pr.head.sha
       # create a new commit record or find the current one
       commit_record = pr_record.commits.find_or_create_by(sha: current_sha)
-      Rails.logger.info "found commit #{commit_record}"
+      Rails.logger.info "found commit #{commit_record.id}, #{commit_record.sha}, test_pushed=#{commit_record.test_pushed}"
       # has the sha been tested yet?
       unless commit_record.test_pushed?
-        commit_record.test_pushed = false
+        commit_record.test_pushed = true
         commit_record.save!
         test_pr(commit_record.pull_request.number)
       end
