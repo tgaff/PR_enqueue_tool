@@ -8,7 +8,7 @@ module GH
 
   def get_and_enqueue_from_github
     pull_requests = get_github_prs
-    open_prs = pull_requests
+    open_prs = pull_requests.sort { |x,y| x.number <=> y.number } # oldest first
 
     open_prs.each do |github_pr|
       pr_record = PullRequest.find_or_create_by(number: github_pr.number)
