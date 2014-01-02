@@ -28,9 +28,10 @@ Gt::Application.configure do
   config.assets.debug = true
 
   config.logger = Logger.new(STDOUT)
-  config.logger.level = Logger.const_get('INFO')
+#  config.logger.level = Logger::INFO
+  config.log_level = :info
   config.github_token = nil
-  config.github_user = 'octocat'
-  config.github_repo = 'Hello-World'
+  config.github_user = nil
+  config.github_repo = nil
 
 end

@@ -1,9 +1,8 @@
 module Jenkins
 
 # JENKINS_URL/job/JOBNAME/build?token=TOKEN
-  #http://oceans-ci01.qa.sc.verticalresponse.com:8080/view/multipass/job/multipass/
-  SERVER = "http://oceans-ci01.qa.sc.verticalresponse.com:8080"
-  BUILD_PATH = '/multipass/build'
+  SERVER = ENV['JENKINS_SERVER'] || "http://oceans-ci01.qa.sc.verticalresponse.com:8080"
+  BUILD_PATH = (ENV['JENKINS_JOB'] || '/multipass') + '/build'
 
 
   def build_pr(pr_num)
@@ -18,7 +17,7 @@ module Jenkins
   end
 
   def post_build(url, pr_num)
-    http = Curl.post(url, { BUILD: pr_num } )
+    http = Curl.post(url, { PR_NUMBER: pr_num } )
     puts http.body_str
     unless http.response_code == 200
       handle_post_error(http, url, pr_num)
@@ -28,7 +27,8 @@ module Jenkins
 
   private
   def handle_post_error(curl_obj, url, pr_num)
-    Rails.logger.error("Failed post build for sha=#{sha}, http_code:#{curl_obj.response_code}")
+    puts "Oh No! Failed to build "
+    Rails.logger.error("Failed post build for pr_num=#{pr_num}, http_code:#{curl_obj.response_code}")
   end
 
   def server_url
