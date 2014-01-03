@@ -1,10 +1,10 @@
 
 module GH
+  require "#{Rails.root}/lib/jenkins"
 
   GITHUB_TOKEN =  Rails.configuration.github_token || ENV['GITHUB_TOKEN'].empty? ? nil : ENV['GITHUB_TOKEN']
   USER =          Rails.configuration.github_user || ENV['GITHUB_USER']
   REPO =          Rails.configuration.github_repo || ENV['GITHUB_REPO']
-
 
   def get_and_enqueue_from_github
     pull_requests = get_github_prs
