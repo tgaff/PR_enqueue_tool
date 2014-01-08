@@ -31,9 +31,21 @@ module GH
     end
   end
 
-  def test_pr(pr)
-    puts "I will test pr#{pr}"
-    Jenkins::build_pr(pr)
+  def test_pr(pr_num)
+    puts "I will test pr#{pr_num}"
+    Jenkins::build_pr(pr_num)
+    if comment_on_prs?
+      comment_on_pr(pr_num, "Enqueueing #{pr_num}" )
+    end
+  end
+
+  def comment_on_pr(pr_num, comment)
+    gh = Github.new(oauth_token: GITHUB_TOKEN, user: USER, repo: REPO)
+    gh.issues.comments.create( USER, REPO, pr_num, body: comment )
+  end
+
+  def comment_on_prs?
+    ENV['COMMENT_ON_PRS'] or false
   end
 
   def get_github_prs

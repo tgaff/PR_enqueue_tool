@@ -101,4 +101,15 @@ describe GH do
     end
   end
 
+  describe '.test_pr' do
+
+    it 'leaves a comment when required to do so' do
+      allow(Jenkins).to receive(:build_pr).with(anything()).and_return(true)
+      expect(self).to receive(:comment_on_prs?).and_return(true)
+      expect(self).to receive(:comment_on_pr).with(333, 'Enqueueing 333')
+
+      test_pr(333)
+    end
+
+  end
 end
