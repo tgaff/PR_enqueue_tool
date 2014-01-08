@@ -11,7 +11,7 @@ describe Jenkins do
     before do
       Curl::Easy.stub(:http_post) { http_response }
       http_response.stub(:body_str) { ' ' }
-      http_response.stub(:response_code) { 200 }
+      http_response.stub(:response_code) { 302 }
     end
 
     it 'posts to the specified SERVER' do
@@ -24,12 +24,17 @@ describe Jenkins do
       jenkins.post_build(url, pr)
     end
 
-    it 'does something with errors' do
+    it 'does something with post errors' do
       http_response.stub(:response_code) { 404 }
       expect(jenkins).to receive(:handle_post_error)
       jenkins.post_build(url, pr)
     end
 
+    it 'does something with curl exceptions' do
+      Curl::Easy.stub(:http_post) { raise 'ye gads' }
+      expect(jenkins).to receive(:handle_post_error)
+      jenkins.post_build(url, pr)
+    end
 
   end
 
@@ -50,7 +55,6 @@ describe Jenkins do
 
     it 'converts a hash into appropriate json with strings' do
       json.should eq json_fixture.gsub(/\s+/,'')
-
     end
   end
 

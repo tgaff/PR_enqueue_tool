@@ -33,6 +33,7 @@ module GH
 
   def test_pr(pr)
     puts "I will test pr#{pr}"
+    Jenkins::build_pr(pr)
   end
 
   def get_github_prs
