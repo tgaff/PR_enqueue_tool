@@ -1,8 +1,8 @@
-namespace :github do
+namespace :enqueue do
 
   desc 'run the build loop' 
   task :run => :environment do
-    timeout = ENV['POLLING_TIMEOUT'] || 15
+    timeout = ENV['POLLING_TIMEOUT'] || 30
     require "#{Rails.root}/lib/github"
     include GH
     while true
