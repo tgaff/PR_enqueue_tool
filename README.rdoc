@@ -1,28 +1,17 @@
-== README
+# Poll github to enqueue jenkins builds
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Usage
+### configuration
+* Works through environment variables mostly.  You can use a shell script to save the variables and load them between builds:
 
-Things you may want to cover:
+```
+export GITHUB_USER=tom
+export GITHUB_TOKEN=29c0d9fe03079dfdf1bd8e3ca2d2d0a6f3e5f423
+export GITHUB_REPO=pudding
+export JENKINS_JOB=name_of_job_we_want_to_run_on_jenkins
+```
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### Running
+* rake enqueue:run
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
