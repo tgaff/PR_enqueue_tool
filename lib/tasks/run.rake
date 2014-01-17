@@ -2,7 +2,7 @@ namespace :enqueue do
 
   desc 'run the build loop' 
   task :run => :environment do
-    timeout = ENV['POLLING_TIMEOUT'] || 30
+    timeout = ENV['POLLING_TIMEOUT'] || 90 # note github api limit is 60 per hour
     require "#{Rails.root}/lib/github"
     include GH
     Rails.logger.info "Starting enqueues #{Time.now}"
