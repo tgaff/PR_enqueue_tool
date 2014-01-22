@@ -2,7 +2,7 @@
 module GH
   require "#{Rails.root}/lib/jenkins"
 
-  GITHUB_TOKEN =  Rails.configuration.github_token || ENV['GITHUB_TOKEN'].empty? ? nil : ENV['GITHUB_TOKEN']
+  GITHUB_TOKEN =  Rails.configuration.github_token || ENV['GITHUB_TOKEN'].nil? ? nil : ENV['GITHUB_TOKEN']
   USER =          Rails.configuration.github_user || ENV['GITHUB_USER']
   REPO =          Rails.configuration.github_repo || ENV['GITHUB_REPO']
 
